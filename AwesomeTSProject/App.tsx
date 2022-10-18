@@ -26,6 +26,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import RootNavigation from './src/navigation/RootNavigation';
 
 const Section: React.FC<
   PropsWithChildren<{
@@ -65,17 +66,10 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <View>
-        <Text> hello</Text>
-        
-         </View>
+    // <SafeAreaView style={backgroundStyle}>
+        <RootNavigation/>
      
-    </SafeAreaView>
+    // </SafeAreaView>
   );
 };
 
