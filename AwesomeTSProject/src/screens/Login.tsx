@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 import Inputfield from '../components/Inputfield';
 import {
@@ -14,12 +15,20 @@ import {
   nameValidator,
 } from '../utils/validators';
 import {Navigation} from '../types';
+// import { useAppDispatch } from '../utils/hook';
+
+import { useDispatch } from 'react-redux';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { login } from '../redux/reducers';
+
 
 type Props = {
   navigation: Navigation;
 };
 
 function Login({navigation}: Props) {
+
+  const dispatch= useDispatch()
   const [email, setEmail] = useState({value: '', error: ''});
   const [password, setPassword] = useState({value: '', error: ''});
 
@@ -32,9 +41,35 @@ function Login({navigation}: Props) {
       setPassword({...password, error: passwordError});
       return;
     }
+    else{
+      Loginuser()
 
-    navigation.navigate('Dummy_posts');
+    }
   };
+
+
+   const Loginuser = () => {
+
+        let token = null;
+        try {
+            if (email.value.toLowerCase() === 'test@gmail.com' && password.value == '1234') {
+                token = email.value + password.value;
+                // here we can use login api to get token and then store it
+              AsyncStorage.setItem('token', token);
+                console.log('token stored');
+                dispatch(login(token))
+                
+            }
+            else {
+                Alert.alert("Invalid user", "mail:test@gmail.com password: 1234")
+
+            }
+        }
+        catch (err) {
+            // Alert.alert("Invalid user", "mail:Testuser@gmail.com password: 12341234")
+            console.log(err);
+        }
+}
 
   return (
     <ScrollView
@@ -81,9 +116,9 @@ function Login({navigation}: Props) {
         <Text style={{color: 'black'}}>Don't have a Account? </Text>
         <Text
           style={styles.ptext}
-          onPress={() => navigation.navigate('Signup')}>
+          onPress={() => navigation.navigate('Registration')}>
           {' '}
-          Sign Up{' '}
+          SignUp{' '}
         </Text>
       </View>
     </ScrollView>

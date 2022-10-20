@@ -27,36 +27,11 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import RootNavigation from './src/navigation/RootNavigation';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux'
+import store,{RootState } from './src/redux/store'
 
-const Section: React.FC<
-  PropsWithChildren<{
-    title: string;
-  }>
-> = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -67,7 +42,11 @@ const App = () => {
 
   return (
     // <SafeAreaView style={backgroundStyle}>
+    <Provider store={store}>
+      <SafeAreaProvider>
         <RootNavigation/>
+        </SafeAreaProvider>
+     </Provider>
      
     // </SafeAreaView>
   );

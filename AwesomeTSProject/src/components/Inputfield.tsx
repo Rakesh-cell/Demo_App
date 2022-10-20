@@ -42,12 +42,14 @@ const Inputfield = ({name,Lefticon,ricon,msgerr,onChangeText,value,secureTextEnt
             onChangeText={onChangeText}
                 
         />
+        { !name.includes("password")? null:
         <Icon
                     name={righticon}
                     color="black"
                     size={20}
                     onPress={iconclicked}
         /> 
+    }
         </View>
         { msgerr?<Text style={styles.errstyle}>{msgerr}</Text>:null}
       </View>
