@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 import Inputfield from '../components/Inputfield';
 import {
@@ -35,8 +36,10 @@ const Registration = ({navigation}: Props) => {
       setPassword({...password, error: passwordError});
       return;
     }
-
-    navigation.navigate('Login');
+    else{
+      Alert.alert("Signin ","Email : test@gmail.com Password : 1234")
+       navigation.navigate('Login');
+    }
   };
   return (
     <ScrollView

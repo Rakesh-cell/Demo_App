@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text ,Button,Alert} from 'react-native'
 import React ,{useState,useEffect}from 'react'
 import { theme } from '../utils/theme'
 import { NavigationContainer} from '@react-navigation/native';
@@ -15,17 +15,25 @@ import Post_Detail from '../screens/Post_Detail';
 import { ActivityIndicator } from 'react-native';
 import { useAppSelector} from '../utils/hook'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { RootStackParamList } from '../types';
+import { logout } from '../redux/reducers';
+import { useDispatch } from 'react-redux';
 
-
-const RootStack = createStackNavigator();
+const RootStack = createStackNavigator<RootStackParamList>();
 type Props = {}
 
 const RootNavigation = () => {
-  // const token = useAppSelector(state=>state.authToken)
-  const token=AsyncStorage.getItem('token')
+  const token = useAppSelector(state=>state.authToken)
+  // const token=AsyncStorage.getItem('token')
   console.log(token);
+  const dispatch= useDispatch()
   const [loading, setloading] = useState(false)
 
+  const signout=()=>{
+    AsyncStorage.clear();
+    dispatch(logout())
+    Alert.alert("INFO","Your logged out")
+  }
   
  useEffect(()=>{
    
@@ -47,7 +55,16 @@ const RootNavigation = () => {
         <RootStack.Screen name="Login" component={Login}  options={{headerShown:false}}/>
         <RootStack.Screen name="Registration" component={Registration} options={{headerShown:false}}/>
         </>:<>
-        <RootStack.Screen name="Dummy_posts" component={Dummy_posts} options={{title: 'Home',headerBackTitleVisible: false}} />
+        <RootStack.Screen name="Dummy_posts" component={Dummy_posts} options={{
+          title: 'Home',
+          headerBackTitleVisible: false,
+          headerRight: () => <Button
+              onPress={signout}
+              title="Logout"
+              color="#000"
+            />,
+      
+         }} />
         <RootStack.Screen name="Post_Detail" component={Post_Detail}/>
         </>}
     </RootStack.Navigator>

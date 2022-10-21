@@ -1,31 +1,41 @@
 import { StyleSheet, Text, View,Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import React from 'react'
-
-type Props = React.ComponentProps<typeof TouchableOpacity>&{
+import { postsObject } from '../redux/reducers'
+import { Navigation } from '../types'
+// React.ComponentProps<typeof TouchableOpacity>&
+type Props ={
     userId?:number,
     id?:number,
     title?: string,
     body?: string,
-
+    navigation?: Navigation
+    // handleScreenChange?:(user:postsObject) => postsObject,
 }
 
 const CustomCard = (props: Props) => {
     const{userId, id, title, body} = props
+
+    const changescreen=()=>{
+        props.navigation.navigate('Post_Detail',{ userId, id, title, body})
+    }
+
   return (
     <View style={styles.container}>
                 <TouchableOpacity style={styles.infoContainer}  
-                // onPress={()=>this.props.handleScreenChange(email,name,picture)}
+                onPress={changescreen}
                 >
                 <Image 
                     
                     source={require('../assets/employee_avatar.png')}
                     style={styles.memberImage}
                     />
-                <View >
-                    
-                    <Text style={styles.name}> {title}</Text>
-                    <Text style={styles.email}> {body} </Text>
+                <View>
+                
+                    <Text style={styles.name} numberOfLines={1} ellipsizeMode='tail'> {title}</Text>
+                    <Text style={styles.email} numberOfLines={1} ellipsizeMode='tail'> userId: {userId} </Text>
+
+                    <Text style={styles.email} numberOfLines={1} ellipsizeMode='tail'> {body} </Text>
                    
                 </View>
                 
@@ -38,7 +48,9 @@ const CustomCard = (props: Props) => {
 export default CustomCard
 
 const styles=StyleSheet.create({
+    
     container:{
+        flex:1,
         marginVertical:7,
         backgroundColor:'white',
         borderRadius:10,
@@ -52,11 +64,13 @@ const styles=StyleSheet.create({
     },
    
     name:{
-        fontSize:20,
+        width:"50%",
+        fontSize:16,
         fontWeight:'bold',
         color:'black'
     },
     email:{
+        width:"90%",
         fontSize:12,
         color:'grey'
     },

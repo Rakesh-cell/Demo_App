@@ -3,16 +3,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {AppThunk} from '../redux/store'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from 'react-native'
-import axios from 'axios'
+
 import { createAsyncThunk } from "@reduxjs/toolkit";
 // import { useAppDispatch } from "../utils/hook";
 
 
-type postsObject={
-  userId:number,
-  id:number,
-  title:string,
-  body:string
+ export type postsObject={
+  userId?:number,
+  id?:number,
+  title?:string,
+  body?:string
 }
 type postcomment={
   postId?:number,

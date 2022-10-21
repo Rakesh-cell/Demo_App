@@ -95,7 +95,7 @@ function Login({navigation}: Props) {
       <View style={styles.inputContainer}>
         <Inputfield
           Label="Password"
-          name="passward"
+          name="password"
           Lefticon="lock-closed"
           ricon="eye-off"
           value={password.value}
