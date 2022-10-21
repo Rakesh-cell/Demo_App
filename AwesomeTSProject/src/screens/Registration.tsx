@@ -5,7 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Alert
+  Alert,
 } from 'react-native';
 import Inputfield from '../components/Inputfield';
 import {
@@ -20,94 +20,87 @@ type Props = {
 };
 
 const Registration = ({navigation}: Props) => {
-  const [name, setName] = useState({ value: '', error: '' });
+  const [name, setName] = useState({value: '', error: ''});
   const [email, setEmail] = useState({value: '', error: ''});
   const [password, setPassword] = useState({value: '', error: ''});
-  
 
-  const _onSignUpPressed= () => {
+  const _onSignUpPressed = () => {
     const nameError = nameValidator(name.value);
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
 
     if (emailError || passwordError || nameError) {
-      setName({ ...name, error: nameError });
+      setName({...name, error: nameError});
       setEmail({...email, error: emailError});
       setPassword({...password, error: passwordError});
       return;
-    }
-    else{
-      Alert.alert("Signin ","Email : test@gmail.com Password : 1234")
-       navigation.navigate('Login');
+    } else {
+      Alert.alert('Signin ', 'Email : test@gmail.com Password : 1234');
+      navigation.navigate('Login');
     }
   };
   return (
     <ScrollView
-    contentContainerStyle={{
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'Rice',
-    }}>
-    <Text style={styles.img}>POSTMAN</Text>
-    <View style={styles.inputContainer}>
-    <Inputfield
-      Label="Name"
-      name="UserName"
-      Lefticon="person"
-      ricon="mail"
-      msgerr={name.error}
-      value={name.value}
-      onChangeText={text => setName({ value: text, error: '' })}
-      
-      />
-
-</View>
-
-    <View style={styles.inputContainer}>
-      
-      <Inputfield
-        Label="Email"
-        name="email"
-        Lefticon="mail"
-        ricon="mail"
-        msgerr={email.error}
-        value={email.value}
-        onChangeText={text => setEmail({value: text, error: ''})}
-      />
-    </View>
-    <View style={styles.inputContainer}>
-      <Inputfield
-        Label="Password"
-        name="password"
-        Lefticon="lock-closed"
-        ricon="eye-off"
-        value={password.value}
-        secureTextEntry
-        msgerr={password.error}
-        onChangeText={text => setPassword({value: text, error: ''})}
-      />
-    </View>
-
-    <TouchableOpacity
-      style={styles.btn}
-      onPress={() => {
-        _onSignUpPressed();
+      contentContainerStyle={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'Rice',
       }}>
-      <Text style={styles.btntext}>SignUp</Text>
-    </TouchableOpacity>
-    <View style={{flexDirection: 'row', marginVertical: 5}}>
-      <Text style={{color: 'black'}}>Already a Member? </Text>
-      <Text
-        style={styles.ptext}
-        onPress={() => navigation.navigate('Login')}>
-        {' '}
-        Login{' '}
-      </Text>
-    </View>
-  </ScrollView>
-  )
-}
+      <Text style={styles.img}>POSTMAN</Text>
+      <View style={styles.inputContainer}>
+        <Inputfield
+          Label="Name"
+          name="UserName"
+          Lefticon="person"
+          ricon="mail"
+          msgerr={name.error}
+          value={name.value}
+          onChangeText={text => setName({value: text, error: ''})}
+        />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Inputfield
+          Label="Email"
+          name="email"
+          Lefticon="mail"
+          ricon="mail"
+          msgerr={email.error}
+          value={email.value}
+          onChangeText={text => setEmail({value: text, error: ''})}
+        />
+      </View>
+      <View style={styles.inputContainer}>
+        <Inputfield
+          Label="Password"
+          name="password"
+          Lefticon="lock-closed"
+          ricon="eye-off"
+          value={password.value}
+          secureTextEntry
+          msgerr={password.error}
+          onChangeText={text => setPassword({value: text, error: ''})}
+        />
+      </View>
+
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => {
+          _onSignUpPressed();
+        }}>
+        <Text style={styles.btntext}>SignUp</Text>
+      </TouchableOpacity>
+      <View style={{flexDirection: 'row', marginVertical: 5}}>
+        <Text style={{color: 'black'}}>Already a Member? </Text>
+        <Text style={styles.ptext} onPress={() => navigation.navigate('Login')}>
+          {' '}
+          Login{' '}
+        </Text>
+      </View>
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -154,5 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(Registration)
-
+export default memo(Registration);

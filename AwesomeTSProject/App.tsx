@@ -8,67 +8,26 @@
  * @format
  */
 
-import React, {type PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+/**
+ * @author Rakesh
+ * @descriptor { This is Demo app for 4 screens (login, register,dummy posts, post details) and testing is done with JEST/Enzyme}
+ */
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import React from 'react';
+
 import RootNavigation from './src/navigation/RootNavigation';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Provider } from 'react-redux'
-import store,{RootState } from './src/redux/store'
-
-
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {Provider} from 'react-redux';
+import store from './src/redux/store';
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    // <SafeAreaView style={backgroundStyle}>
     <Provider store={store}>
       <SafeAreaProvider>
-        <RootNavigation/>
-        </SafeAreaProvider>
-     </Provider>
-     
-    // </SafeAreaView>
+        <RootNavigation />
+      </SafeAreaProvider>
+    </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
