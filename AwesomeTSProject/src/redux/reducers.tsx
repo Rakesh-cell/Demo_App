@@ -6,22 +6,16 @@ export type postsObject = {
   title?: string;
   body?: string;
 };
-type postcomment = {
-  postId?: number;
-  id?: number;
-  name?: string;
-  email?: string;
-  body?: string;
-};
+
 export type initial = {
   authToken: string;
   data: postsObject[];
-  userdata: postcomment;
+
 };
 const initialState: initial = {
   authToken: null,
   data: [],
-  userdata: {},
+
 };
 
 export const Reducers = createSlice({

@@ -11,7 +11,7 @@ type Post_DetailProps = NativeStackScreenProps<
 >;
 
 const Post_Detail = ({route, navigation}: Post_DetailProps) => {
-  console.log('routes from', route);
+  // console.log('routes from', route);
   const {userId, id, title, body} = route.params;
 
   return (

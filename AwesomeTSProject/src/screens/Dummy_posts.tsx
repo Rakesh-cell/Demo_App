@@ -15,7 +15,7 @@ const Dummy_posts = ({navigation}: Props) => {
   const data = useAppSelector(state => state.data);
 
   const [postdata, setpostdata] = useState(data);
-  console.log(data);
+  // console.log(data);
 
   const dispatch = useDispatch();
 
@@ -27,7 +27,7 @@ const Dummy_posts = ({navigation}: Props) => {
     await fetch('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json())
       .then(json => {
-        console.log(json);
+        // console.log(json);
         setpostdata(json);
 
         dispatch(posts(json));
